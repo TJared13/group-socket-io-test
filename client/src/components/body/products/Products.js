@@ -5,7 +5,7 @@ import ProductCard from '../../utils/productCard/ProductCard';
 function Products() {
     const state = useContext(DataContext);
     const [products] = state.products;
-    
+    // console.log(products)
 
 
     return (

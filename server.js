@@ -40,6 +40,8 @@ mongoose.connect(URI, {
 
 
 //Listen server
-http.listen(SERVER_PORT, () => {
+const PORT = SERVER_PORT || 5000;
+
+http.listen(PORT, () => {
     console.log('Server is running on port', SERVER_PORT)
 });
