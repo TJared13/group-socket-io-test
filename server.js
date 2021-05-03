@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const {SERVER_PORT, MONGODB_URL} = process.env;
+
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -22,6 +23,7 @@ io.on('connection', socket => {
 
 //Routes
 app.use('/api', require('./routes/productRouter'));
+app.use('/api', require('./routes/commentRouter'));
 
 
 //Connection to mongodb
