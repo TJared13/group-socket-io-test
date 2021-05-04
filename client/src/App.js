@@ -8,7 +8,6 @@ function App() {
   return (
     <Router>
       <div className="App">
-        
         <Route path="/" component={Products} exact />
         <Route path="/product/:id" component={DetailProduct} exact />
       </div>

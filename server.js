@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const Comments = require('./models/commentModel')
 const {SERVER_PORT, MONGODB_URL} = process.env;
 
 const app = express();
@@ -14,6 +15,16 @@ const io = require('socket.io')(http);
 //socket.io
 io.on('connection', socket => {
     console.log(socket.id + ' connected.')
+
+    socket.on('createComment', async msg => {
+        console.log(msg)
+        const {username, content, product_id, createdAt, rating} = msg
+        const newComment = new Comments({
+            username, content, product_id, createdAt, rating
+        })
+
+        await newComment.save()
+    })
 
     socket.on('disconnect', () => {
         console.log(socket.id + ' disconnected.')
@@ -43,5 +54,5 @@ mongoose.connect(URI, {
 const PORT = SERVER_PORT || 5000;
 
 http.listen(PORT, () => {
-    console.log('Server is running on port', SERVER_PORT)
+    console.log('Server is running on port', PORT)
 });
